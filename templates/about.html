@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Website</title>
+    <style>
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    color: #fff; /* Changed from #333 to white for contrast on dark background */
+    background: #4B0082; /* Dark purple background for the entire page */
+    scroll-behavior: smooth;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Header and Navigation */
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: rgba(75, 0, 130, 0.9); /* Semi-transparent dark purple for header */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+    z-index: 100;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #fff; /* White logo text */
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+}
+
+.nav-links li {
+    margin-left: 2rem;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #fff; /* White nav links */
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: #ddd; /* Light gray on hover */
+}
+
+.hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.hamburger span {
+    width: 25px;
+    height: 3px;
+    background: #fff; /* White hamburger lines */
+    margin: 3px 0;
+}
+
+/* Hero Section */
+/* Hero Section Enhancements */
+.hero {
+    height: 100vh;
+    background: linear-gradient(135deg, #4B0082 0%, #6A0DAD 50%, #8A2BE2 100%); /* Deeper gradient */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #fff;
+    position: relative;
+    overflow: hidden; /* Prevents floating elements from overflowing */
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.1); /* Subtle dark overlay for depth */
+    z-index: 1;
+}
+
+.hero-content {
+    z-index: 2; /* Above overlay */
+    position: relative;
+}
+
+.hero-avatar {
+    margin-bottom: 1rem;
+}
+
+.avatar-img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 5px solid #fff; /* White border for contrast */
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.3); /* Soft glow */
+}
+
+.hero-content h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Text shadow for depth */
+}
+
+.hero-content p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.btn {
+    display: inline-block;
+    padding: 0.8rem 2rem;
+    background: #fff;
+    color: #4B0082;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: all 0.3s;
+    position: relative;
+}
+
+.glow-btn:hover {
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.8); /* Glow effect */
+    transform: scale(1.05); /* Slight scale */
+}
+
+/* Floating Icons */
+.floating-icons {
+    position: absolute;
+    top: 20%;
+    right: 10%;
+    z-index: 1;
+}
+
+.icon-float {
+    font-size: 2rem;
+    color: rgba(255, 255, 255, 0.7);
+    animation: float 3s ease-in-out infinite;
+    margin: 0.5rem;
+}
+
+.icon-float.delay-1 {
+    animation-delay: 1s;
+}
+
+.icon-float.delay-2 {
+    animation-delay: 2s;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+/* Fade-in Animations */
+.fade-in {
+    opacity: 0;
+    animation: fadeInUp 1s ease-out forwards;
+}
+
+.fade-in.delay-1 {
+    animation-delay: 0.5s;
+}
+
+.fade-in.delay-2 {
+    animation-delay: 1s;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.btn {
+    display: inline-block;
+    padding: 0.8rem 2rem;
+    background: #fff; /* White button background */
+    color: #4B0082; /* Dark purple text */
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background 0.3s;
+}
+
+.btn:hover {
+    background: #ddd; /* Light gray on hover */
+}
+
+/* Sections */
+section {
+    padding: 5rem 0;
+    background: rgba(75, 0, 130, 0.1); /* Very light purple overlay for sections */
+}
+
+section h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 2rem;
+    color: #fff; /* White headings */
+}
+
+.profile-img {
+    display: block;
+    margin: 2rem auto;
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+}
+
+/* Skills */
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+}
+
+.skill {
+    background: rgba(255, 255, 255, 0.1); /* Semi-transparent white for skill cards */
+    padding: 1.5rem;
+    text-align: center;
+    border-radius: 5px;
+    color: #fff; /* White text */
+    transition: transform 0.3s;
+}
+
+.skill:hover {
+    transform: translateY(-5px);
+}
+
+.skill i {
+    font-size: 2rem;
+    color: #fff; /* White icons */
+    margin-bottom: 0.5rem;
+}
+
+.progress-bar {
+    background: rgba(255, 255, 255, 0.3); /* Light overlay for progress bar */
+    border-radius: 10px;
+    height: 10px;
+    margin: 0.5rem 0;
+    overflow: hidden;
+}
+
+.progress {
+    background: linear-gradient(90deg, #fff, #ddd); /* White gradient for progress */
+    height: 100%;
+    border-radius: 10px;
+    transition: width 1s ease-in-out;
+}
+
+.skill span {
+    font-weight: bold;
+    color: #fff; /* White percentage */
+}
+
+/* Projects */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.project {
+    background: rgba(255, 255, 255, 0.1); /* Semi-transparent white for project cards */
+    padding: 1.5rem;
+    border-radius: 5px;
+    text-align: center;
+    color: #fff; /* White text */
+}
+
+.project-image {
+    margin-bottom: 1rem;
+    display: flex; /* Flex layout for multiple images */
+    gap: 0.5rem; /* Space between images */
+    overflow: hidden;
+    border-radius: 5px;
+}
+
+.project-image img {
+    flex: 1; /* Equal width for each image */
+    height: auto;
+    max-width: 100%; /* Prevents overflow */
+    display: block;
+    transition: transform 0.3s ease;
+    border-radius: 5px; /* Rounded corners */
+}
+
+.project-image img:hover {
+    transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+    /* ... existing rules ... */
+    .project-image {
+        flex-direction: column; /* Stack images vertically on mobile */
+        gap: 0.5rem;
+    }
+}
+
+/* Social */
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.social-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: #fff; /* White text */
+    padding: 1rem;
+    border-radius: 10px;
+    transition: background 0.3s, transform 0.3s;
+}
+
+.social-link:hover {
+    background: rgba(255, 255, 255, 0.1); /* Light hover */
+    transform: scale(1.1);
+}
+
+.social-link i {
+    font-size: 2rem;
+    color: #fff; /* White icons */
+    margin-bottom: 0.5rem;
+}
+
+.social-link span {
+    font-weight: bold;
+}
+
+/* Contact */
+#contact-form {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+#contact-form input,
+#contact-form textarea {
+    width: 100%;
+    padding: 0.8rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.9); /* Light background for inputs */
+    color: #333; /* Dark text for readability */
+}
+
+#contact-form button {
+    width: 100%;
+    background: #fff; /* White button */
+    color: #4B0082; /* Dark purple text */
+}
+
+.slider-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0,0,0,0.5);
+    color: #fff;
+    border: none;
+    padding: 0.5rem;
+    cursor: pointer;
+    z-index: 10;
+}
+.slider-btn.prev { left: 0; }
+.slider-btn.next { right: 0; }
+.project-image { position: relative; } /* For button positioning */
+
+/* Footer */
+footer {
+    background: rgba(75, 0, 130, 0.9); /* Semi-transparent dark purple */
+    color: #fff; /* White text */
+    text-align: center;
+    padding: 1rem 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: rgba(75, 0, 130, 0.9); /* Match header */
+        flex-direction: column;
+        padding: 1rem;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .hamburger {
+        display: flex;
+    }
+
+    .hero-content h1 {
+        font-size: 2rem;
+    }
+}
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">My Portfolio</div>
+            <ul class="nav-links">
+                <li><a href="#intro">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <section id="intro" class="hero">
+    <div class="hero-overlay"></div>  <!-- Subtle overlay for depth -->
+    <div class="hero-content">
+        <div class="hero-avatar">
+            <img src="/self.jpg" alt="Your Avatar" class="avatar-img">
+        </div>
+        <h1 class="fade-in">Hi, I'm Odidika Somto</h1>
+        <p class="fade-in delay-1">Web Developer | Programmer | Creative </p>
+        <a href="mailto:odidikaanthony02@gmail.com" class="btn btn-outline-secondary" >Hire Me</a>
+    </div>
+    <div class="floating-icons">
+        <i class="fab fa-html5 icon-float"></i>
+        <i class="fab fa-css3-alt icon-float delay-1"></i>
+        <i class="fab fa-js-square icon-float delay-2"></i>
+        <i class="fab fa-python-alt icon-float delay-3"></i>
+    </div>
+</section>
+    <section id="intro" class="hero">
+        <div class="hero-content">
+            
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="container">
+            <h2>About Me</h2>
+            <p> I'm a passionate developer with experience in building web applications. I love creating user-friendly interfaces and solving complex problems.
+               and in my previous projects, I've single handedly structured a web app(Jamor Technology) for techies and companies to connect
+               using python, django, DRF, mySQL. and have also worked with a team to structure a webapp(Nutri-Smart) that suggests meals and
+               monitor health profiles e.t.c using JavaScript, Nodejs, mySQL.</p>
+            <img src="self.jpg" alt="Profile Picture" class="">
+        </div>
+    </section>
+
+    <section id="skills">
+        <div class="container">
+        <h2>Skills</h2>
+        <div class="skills-grid">
+            <div class="skill">
+                <i class="fab fa-html5"></i> <!-- Icon for HTML -->
+                <h3>HTML</h3>
+                <div class="progress-bar">
+                    <div class="progress" style="width: 90%;"></div> <!-- 90% proficiency -->
+                </div>
+                <span>90%</span>
+            </div>
+            <div class="skill">
+                <i class="fab fa-css3-alt"></i> <!-- Icon for CSS -->
+                <h3>CSS</h3>
+                <div class="progress-bar">
+                    <div class="progress" style="width: 85%;"></div>
+                </div>
+                <span>85%</span>
+            </div>
+            <div class="skill">
+                <i class="fab fa-js-square"></i> <!-- Icon for JavaScript -->
+                <h3>JavaScript</h3>
+                <div class="progress-bar">
+                    <div class="progress" style="width: 80%;"></div>
+                </div>
+                <span>80%</span>
+            </div>
+            <div class="skill">
+                <i class="fab fa-react"></i> <!-- Icon for React -->
+                <h3>React</h3>
+                <div class="progress-bar">
+                    <div class="progress" style="width: 75%;"></div>
+                </div>
+                <span>75%</span>
+            </div>
+            <div class="skill">
+                <i class="fab fa-node-js"></i> <!-- Icon for Node.js -->
+                <h3>Node.js</h3>
+                <div class="progress-bar">
+                    <div class="progress" style="width: 70%;"></div>
+                </div>
+                <span>70%</span>
+            </div>
+            <div class="skill">
+                <i class="fab fa-python"></i> <!-- Icon for Python -->
+                <h3>Python</h3>
+                <div class="progress-bar">
+                    <div class="progress" style="width: 65%;"></div>
+                </div>
+                <span>65%</span>
+            </div>
+        </div>
+    </div>
+    </section>
+
+    <section id="projects">
+    <div class="container">
+        <h2>Projects</h2>
+        <div class="projects-grid">
+            <div class="project">
+                <div class="project-image">
+                    <img src="/images/JT1.jpg" alt="Project 1 Desktop Screenshot">
+                    <img src="JT_1.jpg" alt="Project 1 Desktop Screenshot">
+                </div>
+                <h3>Jamor Technology</h3>
+                <p>Jamor Technology (or JamorTech) is a Nigeria-based, remote-first technology company focused on bridging the gap between talent and the tech industry 
+                    through structured internship programs, professional hiring services, and digital solutions.</p>
+                <a href="jamortechnology.com" class="btn">View Project</a>
+            </div>
+            <div class="project">
+                <div class="project-image">
+                    <img src="/images/JT1.jpg" alt="Project 2 Home Page">
+                    <img src="https://via.placeholder.com/300x200/ffffff/4B0082?text=Project+2+Checkout" alt="Project 2 Checkout Page">
+                    <img src="https://via.placeholder.com/300x200/ffffff/4B0082?text=Project+2+Admin" alt="Project 2 Admin Panel">
+                </div>
+                <h3>Project 2</h3>
+                <p>An e-commerce site with payment integration.</p>
+                <a href="#" class="btn">View Project</a>
+            </div>
+            <div class="project">
+                <div class="project-image">
+                    <img src="https://via.placeholder.com/300x200/ffffff/4B0082?text=Project+3+Hero" alt="Project 3 Hero Section">
+                    <img src="https://via.placeholder.com/300x200/ffffff/4B0082?text=Project+3+About" alt="Project 3 About Section">
+                </div>
+                <h3>Project 3</h3>
+                <p>A portfolio website like this one.</p>
+                <a href="#" class="btn">View Project</a>
+            </div>
+        </div>
+    </div>
+</section>
+    
+    <section id="contact">
+        <div class="container">
+            <h2>Contact Me</h2>
+            <form id="contact-form">
+                <input type="text" placeholder="Your Name" required>
+                <input type="email" placeholder="Your Email" required>
+                <textarea placeholder="Your Message" required></textarea>
+                <button type="submit" class="btn">Send Message</button>
+            </form>
+        </div>
+    </section>
+    <section id="social">
+    <div class="container">
+        <h2>Connect With Me</h2>
+        <div class="social-links">
+            <a href="https://github.com/JayRocketMaN/JayRocketMaN" target="_blank" class="social-link">
+                <i class="fab fa-github"></i>
+                <span>GitHub</span>
+            </a>
+            <a href="https://www.linkedin.com/in/somto-anthony-odidika-77a8a8284?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" class="social-link">
+                <i class="fab fa-linkedin"></i>
+                <span>LinkedIn</span>
+            </a>
+            <a href="https://x.com/Odidikasomto" target="_blank" class="social-link">
+                <i class="fab fa-twitter"></i>
+                <span>Twitter</span>
+            </a>
+            <a href="mailto:your.odidikaanthony02@gmail.com" class="social-link">
+                <i class="fas fa-envelope"></i>
+                <span>Email</span>
+            </a>
+        </div>
+    </div>
+</section>
+    
+
+    <footer>
+        <p>&copy; 2026 Odidika Somto. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
