@@ -34,6 +34,7 @@ header {
     background: rgba(75, 0, 130, 0.9); /* Semi-transparent dark purple for header */
     box-shadow: 0 2px 5px rgba(0,0,0,0.5);
     z-index: 100;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Subtle black shadow for depth */
 }
 
 nav {
@@ -242,7 +243,7 @@ section h2 {
 .skills-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 1rem;
+    gap: 2rem;
 }
 
 .skill {
@@ -260,9 +261,27 @@ section h2 {
 
 .skill i {
     font-size: 2rem;
-    color: #fff; /* White icons */
     margin-bottom: 0.5rem;
+    transition: transform 0.3s, color 0.3s;
 }
+
+/* Specific colors for each skill icon */
+.skill:nth-child(1) i { color: #E34F26; } /* HTML - Orange */
+.skill:nth-child(2) i { color: #1572B6; } /* CSS - Blue */
+.skill:nth-child(3) i { color: #F7DF1E; } /* JavaScript - Yellow */
+.skill:nth-child(4) i { color: #339933; } /* Node.js - Green */
+.skill:nth-child(5) i { color: #3776AB; } /* Python - Blue */
+.skill:nth-child(6) i { color: #092E20; } /* Django - Dark Green */
+.skill:nth-child(7) i { color: #000000; } /* Flask - Black (or #FFD43B for light) */
+.skill:nth-child(8) i { color: #47A248; } /* Mongoose - Green */
+.skill:nth-child(9) i { color: #47A248; } /* MongoDB - Green */
+.skill:nth-child(10) i { color: #FF6B35; } /* DRF - Orange */
+.skill:nth-child(11) i { color: #7952B3; } /* Bootstrap - Purple */
+.skill:nth-child(12) i { color: #DC382D; } /* Redis - Red */
+.skill:nth-child(13) i { color: #2496ED; } /* Docker - Blue */
+.skill:nth-child(14) i { color: #52B0E7; } /* Sequelize - Blue */
+.skill:nth-child(15) i { color: #336791; } /* Postgres - Blue */
+.skill:nth-child(16) i { color: #4479A1; } /* MySQL - Blue */
 
 .progress-bar {
     background: rgba(255, 255, 255, 0.3); /* Light overlay for progress bar */
@@ -434,6 +453,60 @@ footer {
         font-size: 2rem;
     }
 }
+.tech-stack {
+    margin: 5rem 0; /* Space around the section */
+    text-align: center;
+}
+
+.tech-stack h3 {
+    margin-bottom: 1rem;
+    color: #fff; /* White text for dark theme */
+}
+
+.stack-icons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem; /* Space between icons */
+    flex-wrap: wrap; /* Wrap on small screens */
+}
+
+.stack-icons i {
+    font-size: 2.5rem; /* Larger icons for visibility */
+    color: #fff; /* White icons */
+    transition: transform 0.3s, color 0.3s; /* Hover effects */
+}
+
+.stack-icons i:hover {
+    transform: scale(1.2); /* Slight zoom */
+    color: #ddd; /* Light gray on hover */
+}
+.personal-info {
+    margin: 1rem 0;
+    text-align: left; /* Align to left for readability */
+    max-width: 600px; /* Limit width */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.personal-info h3 {
+    margin-bottom: 1rem;
+    color: #fff;
+}
+
+.personal-info ul {
+    list-style: disc; /* Bullet points */
+    padding-left: 1.5rem; /* Indent bullets */
+    color: #fff;
+}
+
+.personal-info li {
+    margin-bottom: 0.5rem; /* Space between items */
+    line-height: 1.5; /* Better readability */
+}
+
+.personal-info strong {
+    color: #ddd; /* Slightly lighter for emphasis */
+}
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
@@ -473,37 +546,52 @@ footer {
         <i class="fab fa-python-alt icon-float delay-3"></i>
     </div>
 </section>
-    <section id="intro" class="hero">
-        <div class="hero-content">
-            
+       
+<section id="about">
+    <div class="container">
+        <h2>About Me</h2>
+        <p>I'm a backend enthusiast that enjoys turning ideas into efficient code, with experience in building web applications.
+           I thrive on server-side logic, databases, APIs and making things work behind the scenes and in my previous projects, I've single handedly structured a web app(Jamor Technology) for techies and companies to connect
+           using python, django, djangorestframwork(DRF), mySQL and have also worked with a team to structure a webapp(Nutri-Smart) that suggests meals and
+           monitor health profiles e.t.c using JavaScript, Nodejs, mySQL e.t.c</p>
+        <div class="tech-stack">
+            <h3>My Tech Stack</h3>
+            <div class="stack-icons">
+                <i class="fab fa-html5" title="HTML5"></i>
+                <i class="fab fa-css3-alt" title="CSS3"></i>
+                <i class="fab fa-js-square" title="JavaScript"></i>
+                <i class="fab fa-django" title="django"></i>
+                <i class="fab fa-node-js" title="Node.js"></i>
+                <i class="fab fa-python" title="Python"></i>
+                <i class="fab fa-git-alt" title="Git"></i>
+                <i class="fab fa-github" title="GitHub"></i>
+            </div>
         </div>
-    </section>
-
-    <section id="about">
-        <div class="container">
-            <h2>About Me</h2>
-            <p> I'm a passionate developer with experience in building web applications. I love creating user-friendly interfaces and solving complex problems.
-               and in my previous projects, I've single handedly structured a web app(Jamor Technology) for techies and companies to connect
-               using python, django, DRF, mySQL. and have also worked with a team to structure a webapp(Nutri-Smart) that suggests meals and
-               monitor health profiles e.t.c using JavaScript, Nodejs, mySQL.</p>
-            <img src="self.jpg" alt="Profile Picture" class="">
         </div>
-    </section>
-
-    <section id="skills">
-        <div class="container">
+    <div class="personal-info">
+    <h3>Quick Info</h3>
+    <ul>
+        <li><strong>Email:</strong> odidikaanthony02@gmail.com</li>
+        <li><strong>Experience:</strong> 3+ years in web development</li>
+        <li><strong>Location:</strong> [Lagos/Nigeria]</li>
+        <li><strong>Interests:</strong> Open-source projects and documentations</li>
+    </ul>
+</div>
+</section>
+<section id="skills">
+    <div class="container">
         <h2>Skills</h2>
         <div class="skills-grid">
             <div class="skill">
-                <i class="fab fa-html5"></i> <!-- Icon for HTML -->
+                <i class="fab fa-html5 skill-icon"></i>
                 <h3>HTML</h3>
                 <div class="progress-bar">
-                    <div class="progress" style="width: 90%;"></div> <!-- 90% proficiency -->
+                    <div class="progress" style="width: 90%;"></div>
                 </div>
                 <span>90%</span>
             </div>
             <div class="skill">
-                <i class="fab fa-css3-alt"></i> <!-- Icon for CSS -->
+                <i class="fab fa-css3-alt skill-icon"></i>
                 <h3>CSS</h3>
                 <div class="progress-bar">
                     <div class="progress" style="width: 85%;"></div>
@@ -511,7 +599,7 @@ footer {
                 <span>85%</span>
             </div>
             <div class="skill">
-                <i class="fab fa-js-square"></i> <!-- Icon for JavaScript -->
+                <i class="fab fa-js-square skill-icon"></i>
                 <h3>JavaScript</h3>
                 <div class="progress-bar">
                     <div class="progress" style="width: 80%;"></div>
@@ -519,56 +607,163 @@ footer {
                 <span>80%</span>
             </div>
             <div class="skill">
-                <i class="fab fa-react"></i> <!-- Icon for React -->
-                <h3>React</h3>
+                <i class="fab fa-node-js skill-icon"></i>
+                <h3>Node.js</h3>
                 <div class="progress-bar">
                     <div class="progress" style="width: 75%;"></div>
                 </div>
                 <span>75%</span>
             </div>
             <div class="skill">
-                <i class="fab fa-node-js"></i> <!-- Icon for Node.js -->
-                <h3>Node.js</h3>
+                <i class="fab fa-python skill-icon"></i>
+                <h3>Python</h3>
                 <div class="progress-bar">
                     <div class="progress" style="width: 70%;"></div>
                 </div>
                 <span>70%</span>
             </div>
             <div class="skill">
-                <i class="fab fa-python"></i> <!-- Icon for Python -->
-                <h3>Python</h3>
+                <img src="images/django_9307630.png">  <!-- Generic for Django -->
+                <h3>Django</h3>
                 <div class="progress-bar">
                     <div class="progress" style="width: 65%;"></div>
                 </div>
                 <span>65%</span>
             </div>
+            <div class="skill">
+                <i class="fab fa-code skill-icon"></i>  <!-- Generic for Flask -->
+                <h3>Flask</h3>
+                <div class="progress-bar">
+                    <div class="progress" style="width: 60%;"></div>
+                </div>
+                <span>60%</span>
+            </div>
+            <div class="skill">
+                <i class="fas fa-database skill-icon"></i>  <!-- Generic for Mongoose -->
+                <h3>Mongoose</h3>
+                <div class="progress-bar">
+                    <div class="progress" style="width: 55%;"></div>
+                </div>
+                <span>55%</span>
+            </div>
+            <div class="skill">
+                <i class="fas fa-database skill-icon"></i>  <!-- Generic for MongoDB -->
+                <h3>MongoDB</h3>
+                <div class="progress-bar">
+                    <div class="progress" style="width: 70%;"></div>
+                </div>
+                <span>70%</span>
+            </div>
+            <div class="skill">
+                <i class="fab fa-code skill-icon"></i>  <!-- Generic for DRF -->
+                <h3>DRF</h3>
+                <div class="progress-bar">
+                    <div class="progress" style="width: 60%;"></div>
+                </div>
+                <span>60%</span>
+            </div>
+            <div class="skill">
+                <i class="fab fa-bootstrap skill-icon"></i>
+                <h3>Bootstrap</h3>
+                <div class="progress-bar">
+                    <div class="progress" style="width: 75%;"></div>
+                </div>
+                <span>75%</span>
+            </div>
+            <div class="skill">
+                <i class="fas fa-database skill-icon"></i>  <!-- Generic for Redis -->
+                <h3>Redis</h3>
+                <div class="progress-bar">
+                    <div class="progress" style="width: 50%;"></div>
+                </div>
+                <span>50%</span>
+            </div>
+            <div class="skill">
+                <i class="fab fa-docker skill-icon"></i>
+                <h3>Docker</h3>
+                <div class="progress-bar">
+                    <div class="progress" style="width: 55%;"></div>
+                </div>
+                <span>55%</span>
+            </div>
+            <div class="skill">
+                <i class="fas fa-database skill-icon"></i>  <!-- Generic for Sequelize -->
+                <h3>Sequelize</h3>
+                <div class="progress-bar">
+                    <div class="progress" style="width: 60%;"></div>
+                </div>
+                <span>60%</span>
+            </div>
+            <div class="skill">
+                <i class="fab fa-postgresql skill-icon"></i>
+                <h3>Postgres</h3>
+                <div class="progress-bar">
+                    <div class="progress" style="width: 65%;"></div>
+                </div>
+                <span>65%</span>
+            </div>
+            <div class="skill">
+                <i class="fas fa-database skill-icon"></i>  <!-- Generic for MySQL -->
+                <h3>MySQL</h3>
+                <div class="progress-bar">
+                    <div class="progress" style="width: 70%;"></div>
+                </div>
+                <span>70%</span>
+            </div>
         </div>
     </div>
-    </section>
+</section>
 
     <section id="projects">
     <div class="container">
         <h2>Projects</h2>
         <div class="projects-grid">
             <div class="project">
+                <h3>Jamor Technology</h3>
                 <div class="project-image">
                     <img src="/images/JT1.jpg" alt="Project 1 Desktop Screenshot">
                     <img src="JT_1.jpg" alt="Project 1 Desktop Screenshot">
                 </div>
-                <h3>Jamor Technology</h3>
-                <p>Jamor Technology (or JamorTech) is a Nigeria-based, remote-first technology company focused on bridging the gap between talent and the tech industry 
-                    through structured internship programs, professional hiring services, and digital solutions.</p>
+                    <div class="project-details">
+                    <p><strong>My Role: Back-End Web Developer</strong></p>
+                </div>
+                <p><strong>About: Jamor Technology (or JamorTech) is a Nigeria-based, remote-first technology company focused on bridging the gap between talent and the tech industry 
+                    through structured internship programs, professional hiring services, and digital solutions.</strong></p>
+                <h3>Project Stack</h3>
+                <ul>
+                    <li><strong>Python</strong></li>
+                    <li><strong>Django</strong></li>
+                    <li><strong>djangorestframwork</strong></li>
+                    <li><strong> MySQL</strong></li>
+                     <li><strong>GitHub</strong></li>
+                </ul>
+                
                 <a href="jamortechnology.com" class="btn">View Project</a>
             </div>
             <div class="project">
+                <h3>NutriSmart</h3>
                 <div class="project-image">
                     <img src="/images/JT1.jpg" alt="Project 2 Home Page">
                     <img src="https://via.placeholder.com/300x200/ffffff/4B0082?text=Project+2+Checkout" alt="Project 2 Checkout Page">
                     <img src="https://via.placeholder.com/300x200/ffffff/4B0082?text=Project+2+Admin" alt="Project 2 Admin Panel">
                 </div>
-                <h3>Project 2</h3>
-                <p>An e-commerce site with payment integration.</p>
+                <p><strong>My Role: </strong></p>
+                <p><strong>Tech Stack: JavaScript, Nodejs, Express, MySQL, GitHub</strong></p>
+                <p><strong>About: is a simple mobile/web application designed to recommend personalized meals and provide 
+                    detailed nutritional breakdowns based on the user’s preferences, dietary needs, or health conditions. 
+                    The goal is to promote healthier eating habits through smart food recommendations powered by nutritional data.</strong></p>
+                    <div class="project-details">
+                <p><strong>Role:</strong> Back-End Web Developer</p>
+                <p><strong>Tech Stack:</strong></p>
+                <div class="tech-stack-icons">
+                <i class="fab fa-js-square" title="JavaScript"></i>
+                <i class="fab fa-express-alt" title="Express"></i>
+                <i class="fab fa-node-js" title="Node.js"></i>
+                <i class="fab fa-database" title="Redis"></i>
+                <i class="fas fa-database" title="MySQL"></i>
+            </div>
                 <a href="#" class="btn">View Project</a>
+            </div>
             </div>
             <div class="project">
                 <div class="project-image">
@@ -577,6 +772,16 @@ footer {
                 </div>
                 <h3>Project 3</h3>
                 <p>A portfolio website like this one.</p>
+                <div class="project-details">
+                <p><strong>Role:</strong> Full-Stack Developer</p>
+                <p><strong>Tech Stack:</strong></p>
+                <div class="tech-stack-icons">
+                <i class="fab fa-html5" title="HTML"></i>
+                <i class="fab fa-css3-alt" title="CSS"></i>
+                <i class="fab fa-js-square" title="JavaScript"></i>
+                <i class="fab fa-node-js" title="Node.js"></i>
+                <i class="fas fa-database" title="MongoDB"></i>
+            </div>
                 <a href="#" class="btn">View Project</a>
             </div>
         </div>
