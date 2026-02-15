@@ -8,12 +8,14 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Mobile menu toggle
+// Mobile menu toggle with logging and force close
 const hamburger = document.getElementById('hamburger');
 const navLinks = document.querySelector('.nav-links');
 
 hamburger.addEventListener('click', () => {
+    console.log('Hamburger clicked'); // For debugging
     navLinks.classList.toggle('active');
+    console.log('Menu active:', navLinks.classList.contains('active')); // Check if active class is added/removed
 });
 
 // Simple form submission (logs to console for demo)
@@ -74,4 +76,11 @@ function typeWriter() {
 window.addEventListener('load', () => {
     heading.textContent = ''; // Clear initial text
     typeWriter();
+});
+
+// Close mobile menu when a link is clicked
+document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+        navLinks.classList.remove('active');
+    });
 });

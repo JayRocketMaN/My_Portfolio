@@ -18,6 +18,6 @@ def about():
     return render_template('about.html')
 
 if __name__ == "__main__":
-    myWebsite.run(debug=True)
+    myWebsite.run(debug=True,host="0.0.0.0",port=8090)
 
     #host="0.0.0.0",port=8090

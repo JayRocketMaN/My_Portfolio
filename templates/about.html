@@ -32,7 +32,6 @@ header {
     top: 0;
     width: 100%;
     background: rgba(75, 0, 130, 0.9); /* Semi-transparent dark purple for header */
-    box-shadow: 0 2px 5px rgba(0,0,0,0.5);
     z-index: 100;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Subtle black shadow for depth */
 }
@@ -86,16 +85,34 @@ nav {
 /* Hero Section Enhancements */
 .hero {
     height: 100vh;
-    background: linear-gradient(135deg, #4B0082 0%, #6A0DAD 50%, #8A2BE2 100%); /* Deeper gradient */
+    background: linear-gradient(135deg, #4B0082 0%, #6A0DAD 25%, #8A2BE2 50%, #9932CC 75%, #BA55D3 100%); /* More complex gradient with additional purple shades */
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
     color: #fff;
-    position: relative;
-    overflow: hidden; /* Prevents floating elements from overflowing */
+    overflow: hidden;
 }
 
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(255, 255, 255, 0.05) 0%, transparent 50%); /* Subtle radial overlays for depth */
+    animation: backgroundShift 10s ease-in-out infinite; /* Slow animation for movement */
+    z-index: 0;
+}
+
+@keyframes backgroundShift {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(10px, -10px) scale(1.05); }
+}
 .hero-overlay {
     position: absolute;
     top: 0;
@@ -133,6 +150,24 @@ nav {
     font-size: 1.2rem;
     margin-bottom: 2rem;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.hero::after {
+    content: '';
+    position: absolute;
+    top: 20%;
+    left: 10%;
+    width: 100px;
+    height: 100px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    animation: floatShape 8s ease-in-out infinite;
+    z-index: 0;
+}
+
+@keyframes floatShape {
+    0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.5; }
+    50% { transform: translateY(-20px) rotate(180deg); opacity: 0.8; }
 }
 
 .btn {
@@ -227,6 +262,8 @@ section {
 section h2 {
     text-align: center;
     margin-bottom: 2rem;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     font-size: 2rem;
     color: #fff; /* White headings */
 }
@@ -270,7 +307,7 @@ section h2 {
 .skill:nth-child(2) i { color: #1572B6; } /* CSS - Blue */
 .skill:nth-child(3) i { color: #F7DF1E; } /* JavaScript - Yellow */
 .skill:nth-child(4) i { color: #339933; } /* Node.js - Green */
-.skill:nth-child(5) i { color: #3776AB; } /* Python - Blue */
+.skill:nth-child(5) i { color: yellowgreen; } /* Python - Blue */
 .skill:nth-child(6) i { color: #092E20; } /* Django - Dark Green */
 .skill:nth-child(7) i { color: #000000; } /* Flask - Black (or #FFD43B for light) */
 .skill:nth-child(8) i { color: #47A248; } /* Mongoose - Green */
@@ -442,11 +479,11 @@ footer {
     }
 
     .nav-links.active {
-        display: flex;
+        display: flex !important;
     }
 
     .hamburger {
-        display: flex;
+        display: inline-flex;
     }
 
     .hero-content h1 {
@@ -507,6 +544,29 @@ footer {
 .personal-info strong {
     color: #ddd; /* Slightly lighter for emphasis */
 }
+.cv-download {
+    margin-top: 2rem; /* Space below the "Learn More" button */
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.cv-btn {
+    display: inline-block;
+    padding: 0.8rem 2rem;
+    background: #fff; /* White background */
+    color: #4B0082; /* Dark purple text */
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background 0.3s, transform 0.3s;
+    border: 2px solid #fff; /* Optional border for emphasis */
+}
+
+.cv-btn:hover {
+    background: #4B0082; /* Purple background on hover */
+    color: #fff; /* White text on hover */
+    transform: scale(1.05); /* Slight zoom */
+}
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
@@ -540,17 +600,19 @@ footer {
         <a href="mailto:odidikaanthony02@gmail.com" class="btn btn-outline-secondary" >Hire Me</a>
     </div>
     <div class="floating-icons">
-        <i class="fab fa-html5 icon-float"></i>
-        <i class="fab fa-css3-alt icon-float delay-1"></i>
-        <i class="fab fa-js-square icon-float delay-2"></i>
-        <i class="fab fa-python-alt icon-float delay-3"></i>
+        <i class="fab fa-python icon-float "></i>
+        <i class="fab fa-github icon-float "></i>
+        <i class="fab fa-html5 icon-float delay-1"></i>
+        <i class="fab fa-css3-alt icon-float delay-2"></i>
+        <i class="fab fa-js-square icon-float delay-3"></i>
+        
     </div>
 </section>
        
 <section id="about">
     <div class="container">
         <h2>About Me</h2>
-        <p>I'm a backend enthusiast that enjoys turning ideas into efficient code, with experience in building web applications.
+        <p>I'm a backend enthusiast that enjoys turning ideas into efficient codes with experience in building web applications.
            I thrive on server-side logic, databases, APIs and making things work behind the scenes and in my previous projects, I've single handedly structured a web app(Jamor Technology) for techies and companies to connect
            using python, django, djangorestframwork(DRF), mySQL and have also worked with a team to structure a webapp(Nutri-Smart) that suggests meals and
            monitor health profiles e.t.c using JavaScript, Nodejs, mySQL e.t.c</p>
@@ -560,7 +622,7 @@ footer {
                 <i class="fab fa-html5" title="HTML5"></i>
                 <i class="fab fa-css3-alt" title="CSS3"></i>
                 <i class="fab fa-js-square" title="JavaScript"></i>
-                <i class="fab fa-django" title="django"></i>
+                <i class="fab fa-docker" title="Docker"></i>
                 <i class="fab fa-node-js" title="Node.js"></i>
                 <i class="fab fa-python" title="Python"></i>
                 <i class="fab fa-git-alt" title="Git"></i>
@@ -572,11 +634,15 @@ footer {
     <h3>Quick Info</h3>
     <ul>
         <li><strong>Email:</strong> odidikaanthony02@gmail.com</li>
+        <li><strong>Phone:</strong> (234)09035061392</li>
         <li><strong>Experience:</strong> 3+ years in web development</li>
         <li><strong>Location:</strong> [Lagos/Nigeria]</li>
         <li><strong>Interests:</strong> Open-source projects and documentations</li>
     </ul>
 </div>
+ <div class="cv-download fade-in delay-3">
+            <a href="cv.pdf" download class="cv-btn">Download CV</a>
+        </div>
 </section>
 <section id="skills">
     <div class="container">
@@ -721,66 +787,71 @@ footer {
             <div class="project">
                 <h3>Jamor Technology</h3>
                 <div class="project-image">
-                    <img src="/images/JT1.jpg" alt="Project 1 Desktop Screenshot">
-                    <img src="JT_1.jpg" alt="Project 1 Desktop Screenshot">
-                </div>
-                    <div class="project-details">
-                    <p><strong>My Role: Back-End Web Developer</strong></p>
-                </div>
-                <p><strong>About: Jamor Technology (or JamorTech) is a Nigeria-based, remote-first technology company focused on bridging the gap between talent and the tech industry 
-                    through structured internship programs, professional hiring services, and digital solutions.</strong></p>
-                <h3>Project Stack</h3>
-                <ul>
-                    <li><strong>Python</strong></li>
-                    <li><strong>Django</strong></li>
-                    <li><strong>djangorestframwork</strong></li>
-                    <li><strong> MySQL</strong></li>
-                     <li><strong>GitHub</strong></li>
-                </ul>
-                
-                <a href="jamortechnology.com" class="btn">View Project</a>
-            </div>
-            <div class="project">
-                <h3>NutriSmart</h3>
-                <div class="project-image">
                     <img src="/images/JT1.jpg" alt="Project 2 Home Page">
                     <img src="https://via.placeholder.com/300x200/ffffff/4B0082?text=Project+2+Checkout" alt="Project 2 Checkout Page">
                     <img src="https://via.placeholder.com/300x200/ffffff/4B0082?text=Project+2+Admin" alt="Project 2 Admin Panel">
                 </div>
-                <p><strong>My Role: </strong></p>
-                <p><strong>Tech Stack: JavaScript, Nodejs, Express, MySQL, GitHub</strong></p>
-                <p><strong>About: is a simple mobile/web application designed to recommend personalized meals and provide 
-                    detailed nutritional breakdowns based on the user’s preferences, dietary needs, or health conditions. 
-                    The goal is to promote healthier eating habits through smart food recommendations powered by nutritional data.</strong></p>
+                <p><strong>Tech Stack:</strong> Python, Django</p>                
+                <p>djangorestframwork, MySQL, GitHub</p>
+                <p><strong>Jamor Technology (or JamorTech) is a Nigeria-based, 
+                    remote-first technology company focused on bridging the gap between talent and the tech industry 
+                    through structured internship programs, professional hiring services, and digital solutions.</strong></p>
                     <div class="project-details">
                 <p><strong>Role:</strong> Back-End Web Developer</p>
                 <p><strong>Tech Stack:</strong></p>
                 <div class="tech-stack-icons">
-                <i class="fab fa-js-square" title="JavaScript"></i>
-                <i class="fab fa-express-alt" title="Express"></i>
-                <i class="fab fa-node-js" title="Node.js"></i>
-                <i class="fab fa-database" title="Redis"></i>
+                <i class="fab fa-python" title="Python"></i>
+                <i class="fab fa-github" title="GitHub"></i>
                 <i class="fas fa-database" title="MySQL"></i>
             </div>
                 <a href="#" class="btn">View Project</a>
             </div>
             </div>
             <div class="project">
+                <h3>Nutri-Smart</h3>
+                <div class="project-image">
+                    <img src="/images/JT1.jpg" alt="Project 2 Home Page">
+                    <img src="https://via.placeholder.com/300x200/ffffff/4B0082?text=Project+2+Checkout" alt="Project 2 Checkout Page">
+                    <img src="https://via.placeholder.com/300x200/ffffff/4B0082?text=Project+2+Admin" alt="Project 2 Admin Panel">
+                </div>
+                <p><strong>Tech Stack:</strong> JavaScript, Nodejs</p>
+                <p>MySQL, Express, GitHub</p>
+                <p><strong>Nutri-Smart is a simple mobile/web application designed to recommend personalized meals and provide 
+                    detailed nutritional breakdowns based on the user’s preferences, dietary needs, or health conditions. 
+                    The goal is to promote healthier eating habits through smart food recommendations powered by nutritional data.</strong></p>
+                <div class="project-details">
+                <p><strong>Role:</strong> Back-End Web Developer</p>
+                <p><strong>Tech Stack:</strong></p>
+                <div class="tech-stack-icons">
+                <i class="fab fa-js-square" title="JavaScript"></i>
+                <i class="fab fa-express-alt" title="Express"></i>
+                <i class="fab fa-node-js" title="Node.js"></i>
+                <i class="fab fa-github" title="GitHub"></i>
+                <i class="fas fa-database" title="MySQL"></i>
+            </div>
+                <a href="#" class="btn">View Project</a>
+            </div>
+            </div>
+            <div class="project">
+                 <h3>My Portfolio</h3>
                 <div class="project-image">
                     <img src="https://via.placeholder.com/300x200/ffffff/4B0082?text=Project+3+Hero" alt="Project 3 Hero Section">
                     <img src="https://via.placeholder.com/300x200/ffffff/4B0082?text=Project+3+About" alt="Project 3 About Section">
                 </div>
-                <h3>Project 3</h3>
-                <p>A portfolio website like this one.</p>
+                <p><strong>Tech Stack:</strong> Python, Flask, GitHub</p>                
+                <p>JavaScript, HTML, CSS, Bootstrap</p>
+                <p><strong>personal portfolio website showcasing backend development projects, 
+                skills, and experiences. Built with HTML, CSS, and JavaScript, 
+                it highlights my passion for server-side tech and problem-solving. 
+                Features include a project gallery, skills section, and contact info.</strong></p>
                 <div class="project-details">
                 <p><strong>Role:</strong> Full-Stack Developer</p>
                 <p><strong>Tech Stack:</strong></p>
                 <div class="tech-stack-icons">
+                <i class="fab fa-python" title="Python"></i>
                 <i class="fab fa-html5" title="HTML"></i>
                 <i class="fab fa-css3-alt" title="CSS"></i>
                 <i class="fab fa-js-square" title="JavaScript"></i>
-                <i class="fab fa-node-js" title="Node.js"></i>
-                <i class="fas fa-database" title="MongoDB"></i>
             </div>
                 <a href="#" class="btn">View Project</a>
             </div>
