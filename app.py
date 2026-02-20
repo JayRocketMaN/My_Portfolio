@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, redirect
 from flask_bootstrap import Bootstrap5
 
 
@@ -16,6 +16,14 @@ def skills():
 @myWebsite.route("/about")
 def about():
     return render_template('about.html')
+
+@myWebsite.route("/sendMessage", methods=['post'])
+def sendMessage():
+    your_message = request.form.get("Your Message")
+    if len(str('your_message')) <= 200:
+     return redirect('/')
+    else:
+        return('Message is too long')
 
 if __name__ == "__main__":
     myWebsite.run(debug=True,host="0.0.0.0",port=8090)

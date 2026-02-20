@@ -4,8 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Website</title>
-    <style>
-/* Reset and base styles */
+    <link rel="stylesheet" href="..//static/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<style>
+    /* Reset and base styles */
 * {
     margin: 0;
     padding: 0;
@@ -389,6 +391,46 @@ section h2 {
     color: #fff; /* White percentage */
 }
 
+/* Services Section */
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.service-card {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 2rem;
+    border-radius: 10px;
+    text-align: center;
+    color: #fff;
+    transition: transform 0.3s, background 0.3s;
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.service-icon {
+    font-size: 3rem;
+    color: #fff;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.service-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #fff;
+}
+
+.service-card p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #ddd;
+}
 /* Projects */
 .projects-grid {
     display: grid;
@@ -523,7 +565,7 @@ footer {
         left: 0;
         width: 100%;
         background: rgba(75, 0, 130, 0.9); /* Match header */
-        flex-direction: column;
+        flex-direction: row;
         padding: 1rem;
         box-shadow: 0 2px 5px rgba(0,0,0,0.5);
     }
@@ -617,8 +659,8 @@ footer {
     color: #fff; /* White text on hover */
     transform: scale(1.05); /* Slight zoom */
 }
+
 </style>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
     <header>
@@ -628,6 +670,7 @@ footer {
                 <li><a href="#intro">Home</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#skills">Skills</a></li>
+                <li><a href="#services">Services</a></li>
                 <li><a href="#projects">Projects</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
@@ -643,7 +686,7 @@ footer {
     <div class="hero-overlay"></div>  <!-- Subtle overlay for depth -->
     <div class="hero-content">
         <div class="hero-avatar">
-            <img src="https://robohash.org/human" alt="Your Avatar" class="avatar-img">
+            <img src="../static/self.jpg" alt="Your Avatar" class="avatar-img">
         </div>
         <h1 class="fade-in">Hi, I'm Odidika Somto</h1>
         <p class="fade-in delay-1">Web Developer | Programmer | Creative </p>
@@ -694,7 +737,7 @@ footer {
     </ul>
 </div>
  <div class="cv-download fade-in delay-3">
-            <a href="Cv tech.pdf" download class="cv-btn">Download CV</a>
+            <a href="../static/Cv tech.pdf" download class="cv-btn">Download CV</a>
         </div>
 </section>
 <section id="skills">
@@ -742,7 +785,7 @@ footer {
                 <span>70%</span>
             </div>
             <div class="skill">
-                <img src="images/django_9307630.png">  <!-- Generic for Django -->
+                <i class="fab fa-code skill-icon"></i>  <!-- Generic for Django -->
                 <h3>Django</h3>
                 <div class="progress-bar">
                     <div class="progress" style="width: 65%;"></div>
@@ -832,7 +875,44 @@ footer {
         </div>
     </div>
 </section>
-
+ 
+    <section id="services">
+    <div class="container">
+        <h2>My Services</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <i class="fas fa-code service-icon"></i>
+                <h3>Web Development</h3>
+                <p>Building responsive, user-friendly websites and web applications using modern technologies like HTML, CSS, JavaScript, and more.</p>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-paint-brush service-icon"></i>
+                <h3>UI/UX Design</h3>
+                <p>Creating intuitive, visually appealing interfaces and user experiences that enhance user engagement and satisfaction.</p>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-server service-icon"></i>
+                <h3>Backend Development</h3>
+                <p>Developing robust server-side applications and APIs using Python, Node.js, Django, and database management systems.</p>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-mobile-alt service-icon"></i>
+                <h3>Responsive Design</h3>
+                <p>Ensuring websites look great and function smoothly on all devices, from desktops to mobile phones.</p>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-database service-icon"></i>
+                <h3>Database Management</h3>
+                <p>Designing, managing, and optimizing databases using MongoDB, PostgreSQL, MySQL, and other database systems.</p>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-cloud service-icon"></i>
+                <h3>Deployment & DevOps</h3>
+                <p>Deploying applications to cloud platforms, setting up CI/CD pipelines, and managing containers with Docker.</p>
+            </div>
+        </div>
+    </div>
+</section>
     <section id="projects">
     <div class="container">
         <h2>Projects</h2>
@@ -840,9 +920,9 @@ footer {
             <div class="project">
                 <h3>Jamor Technology</h3>
                 <div class="project-image">
-                    <img src="https://robohash.org/house" alt="Project 2 Home Page">
-                    <img src="https://robohash.org/car" alt="Project 2 Checkout Page">
-                    <img src="https://robohash.org/door" alt="Project 2 Admin Panel">
+                    <img src="../static/JT1.jpg" alt="Project 2 Home Page">
+                    <img src="../static/JT2.jpg" alt="Project 2 Checkout Page">
+                    <img src="../static/JT3.jpg" alt="Project 2 Admin Panel">
                 </div>
                 <p><strong>Tech Stack:</strong> Python, Django</p>                
                 <p>djangorestframwork, MySQL, GitHub</p>
@@ -863,9 +943,9 @@ footer {
             <div class="project">
                 <h3>Nutri-Smart</h3>
                 <div class="project-image">
-                    <img src="https://robohash.org/car" alt="Project 2 Home Page">
-                    <img src="https://robohash.org/car" alt="Project 2 Checkout Page">
-                    <img src="https://robohash.org/car" alt="Project 2 Admin Panel">
+                    <img src="../static/NS1.jpg" alt="Project 2 Home Page">
+                    <img src="../static/NS2.jpg" alt="Project 2 Checkout Page">
+                    <img src="../static/NS3.jpg" alt="Project 2 Admin Panel">
                 </div>
                 <p><strong>Tech Stack:</strong> JavaScript, Nodejs</p>
                 <p>MySQL, Express, GitHub</p>
@@ -915,7 +995,7 @@ footer {
     <section id="contact">
         <div class="container">
             <h2>Contact Me</h2>
-            <form id="contact-form">
+            <form id="contact-form" action="/sendMessage", method="post" >
                 <input type="text" placeholder="Your Name" required>
                 <input type="email" placeholder="Your Email" required>
                 <textarea placeholder="Your Message" required></textarea>
