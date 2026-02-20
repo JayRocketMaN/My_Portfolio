@@ -8,15 +8,6 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Mobile menu toggle with logging and force close
-const hamburger = document.getElementById('hamburger');
-const navLinks = document.querySelector('.nav-links');
-
-hamburger.addEventListener('click', () => {
-    console.log('Hamburger clicked'); // For debugging
-    navLinks.classList.toggle('active');
-    console.log('Menu active:', navLinks.classList.contains('active')); // Check if active class is added/removed
-});
 
 // Simple form submission (logs to console for demo)
 document.getElementById('contact-form').addEventListener('submit', function(e) {
@@ -81,6 +72,37 @@ window.addEventListener('load', () => {
 // Close mobile menu when a link is clicked
 document.querySelectorAll('.nav-links a').forEach(link => {
     link.addEventListener('click', () => {
+        navLinks.classList.remove('active');
+    });
+});
+   
+
+
+
+
+
+// Simple hamburger menu
+const hamburger = document.getElementById('hamburger');
+const navLinks = document.getElementById('nav-links');
+
+if (hamburger && navLinks) {
+    hamburger.addEventListener('click', function() {
+        navLinks.classList.toggle('active');
+    });
+}
+
+// Close button
+const closeMenu = document.getElementById('close-menu');
+if (closeMenu) {
+    closeMenu.addEventListener('click', function() {
+        navLinks.classList.remove('active');
+    });
+}
+
+// Close on link click
+const links = document.querySelectorAll('.nav-links a');
+links.forEach(function(link) {
+    link.addEventListener('click', function() {
         navLinks.classList.remove('active');
     });
 });
