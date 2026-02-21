@@ -265,6 +265,110 @@ nav {
     50% { transform: translateY(-10px); }
 }
 
+/* CTA Section - Fancy and Bold */
+.cta-section {
+    padding: 4rem 1rem;
+    background: linear-gradient(135deg, #4B0082 0%, #6A0DAD 50%, #8A2BE2 100%);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.cta-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 30% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 70% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+    animation: ctaShift 8s ease-in-out infinite;
+}
+
+.cta-content {
+    position: relative;
+    z-index: 1;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.cta-section h2 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #fff;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    animation: ctaFadeIn 1.5s ease-out;
+}
+
+.cta-section p {
+    font-size: 1.1rem;
+    color: #f0f0f0;
+    line-height: 1.8;
+    margin-bottom: 2rem;
+    font-weight: 500;
+    animation: ctaFadeIn 2s ease-out;
+}
+
+.cta-btn {
+    display: inline-block;
+    padding: 1rem 2.5rem;
+    background: #fff;
+    color: #4B0082;
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    animation: ctaFadeIn 2.5s ease-out;
+}
+
+.cta-btn:hover {
+    background: #4B0082;
+    color: #fff;
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+}
+
+/* Animations */
+@keyframes ctaFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes ctaShift {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(10px, 0); }
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .cta-section h2 {
+        font-size: 1.8rem;
+        letter-spacing: 2px;
+    }
+    
+    .cta-section p {
+        font-size: 1rem;
+    }
+    
+    .cta-btn {
+        padding: 0.8rem 2rem;
+        font-size: 1rem;
+    }
+}
+
 /* Fade-in Animations */
 .fade-in {
     opacity: 0;
@@ -361,6 +465,7 @@ section h2 {
 .skill:nth-child(6) i { color: #092E20; } /* Django - Dark Green */
 .skill:nth-child(7) i { color: #000000; } /* Flask - Black */
 .skill:nth-child(8) i { color: #47A248; } /* MongoDB - Green */
+.skill:nth-child(7) i { color: #009688; } /* FastAPI - Teal */
 .skill:nth-child(9) i { color: #7952B3; } /* Bootstrap - Purple */
 .skill:nth-child(10) i { color: #DC382D; } /* Redis - Red */
 .skill:nth-child(11) i { color: #2496ED; } /* Docker - Blue */
@@ -472,6 +577,9 @@ section h2 {
     .project-image {
         flex-direction: column; /* Stack images vertically on mobile */
         gap: 0.5rem;
+        width: 120mm;
+        padding-left: 12mm;
+        align-content: normal;
     }
 }
 
@@ -750,6 +858,7 @@ footer {
                 <i class="fab fa-python" title="Python"></i>
                 <i class="fab fa-git-alt" title="Git"></i>
                 <i class="fab fa-github" title="GitHub"></i>
+                <i class="devicon-fastapi-plain" title="FastAPI"></i>
             </div>
         </div>
         </div>
@@ -820,6 +929,14 @@ footer {
                 <span>65%</span>
             </div>
             <div class="skill">
+                <i class="devicon-fastapi-plain skill-icon"></i>
+                <h3>FastAPI</h3>
+                <div class="progress-bar">
+                    <div class="progress" style="width: 60%;"></div>
+                </div>
+                <span>60%</span>
+            </div>
+            <div class="skill">
                 <i class="devicon-flask-original skill-icon"></i>
                 <h3>Flask</h3>
                 <div class="progress-bar">
@@ -834,6 +951,14 @@ footer {
                     <div class="progress" style="width: 70%;"></div>
                 </div>
                 <span>70%</span>
+            </div>
+            <div class="skill">
+                <i class="devicon-django-plain skill-icon"></i>
+                <h3>DRF</h3>
+                <div class="progress-bar">
+                    <div class="progress" style="width: 60%;"></div>
+                </div>
+                <span>60%</span>
             </div>
             <div class="skill">
                 <i class="devicon-bootstrap-plain skill-icon"></i>
@@ -902,7 +1027,6 @@ footer {
         </div>
     </div>
 </section>
- 
     <section id="services">
     <div class="container">
         <h2>My Services</h2>
@@ -964,7 +1088,7 @@ footer {
                 <i class="fab fa-github" title="GitHub"></i>
                 <i class="fas fa-database" title="MySQL"></i>
             </div>
-                <a href="#" class="btn">View Project</a>
+                <a href="https://github.com/JayRocketMaN/JayRocketMaN.git" class="btn">View Project</a>
             </div>
             </div>
             <div class="project">
@@ -1054,15 +1178,20 @@ footer {
         </div>
     </div>
 </section>
-    
 
-    <footer>
+<section class="cta-section">
+    <div class="cta-content">
+        <h2>Let's build something awesome!</h2>
+        <a href="#contact" class="cta-btn">Get In Touch</a>
+    </div>
+</section>
+
+<footer>
         <p>&copy; 2026 Odidika Somto. All rights reserved.</p>
     </footer>
 
     <script src="script.js"></script>
-   <!-- Add this at the very end of body, after all other content -->
-<script>
+   <script>
     // Test if JavaScript is working
     console.log('Testing JavaScript...');
     
