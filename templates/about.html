@@ -791,7 +791,26 @@ footer {
     color: #fff; /* White text on hover */
     transform: scale(1.05); /* Slight zoom */
 }
+/* Flash Messages */
+.flash-message {
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: bold;
+}
 
+.flash-message.success {
+    background: rgba(0, 255, 0, 0.2);
+    color: #00ff00;
+    border: 1px solid #00ff00;
+}
+
+.flash-message.error {
+    background: rgba(255, 0, 0, 0.2);
+    color: #ff0000;
+    border: 1px solid #ff0000;
+}
 </style>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
 </head>
@@ -819,10 +838,10 @@ footer {
     <div class="hero-overlay"></div>  <!-- Subtle overlay for depth -->
     <div class="hero-content">
         <div class="hero-avatar">
-            <img src="../static/self.jpg" alt="Your Avatar" class="avatar-img">
+            <img src="../static/images/self.jpg" alt="Your Avatar" class="avatar-img">
         </div>
         <h1 class="fade-in">Hi, I'm Odidika Somto</h1>
-        <p class="fade-in delay-1">Web Developer | Programmer | Creative </p>
+        <p class="fade-in delay-1">Software Developer | Programmer | Creative </p>
         <a href="mailto:odidikaanthony02@gmail.com" class="btn btn-outline-secondary" >Hire Me</a>
     </div>
     <div class="shape1"></div>
@@ -1071,9 +1090,9 @@ footer {
             <div class="project">
                 <h3>Jamor Technology</h3>
                 <div class="project-image">
-                    <img src="../static/JT1.jpg" alt="Project 2 Home Page">
-                    <img src="../static/JT2.jpg" alt="Project 2 Checkout Page">
-                    <img src="../static/JT3.jpg" alt="Project 2 Admin Panel">
+                    <img src="../static/images/JT1.jpg" alt="Project 2 Home Page">
+                    <img src="../static/images/JT2.jpg" alt="Project 2 Checkout Page">
+                    <img src="../static/images/JT3.jpg" alt="Project 2 Admin Panel">
                 </div>
                 <p><strong>Tech Stack:</strong> Python, Django</p>                
                 <p>djangorestframwork, MySQL, GitHub</p>
@@ -1094,9 +1113,9 @@ footer {
             <div class="project">
                 <h3>Nutri-Smart</h3>
                 <div class="project-image">
-                    <img src="../static/NS1.jpg" alt="Project 2 Home Page">
-                    <img src="../static/NS2.jpg" alt="Project 2 Checkout Page">
-                    <img src="../static/NS3.jpg" alt="Project 2 Admin Panel">
+                    <img src="../static/images/NS1.jpg" alt="Project 2 Home Page">
+                    <img src="../static/images/NS2.jpg" alt="Project 2 Checkout Page">
+                    <img src="../static/images/NS3.jpg" alt="Project 2 Admin Panel">
                 </div>
                 <p><strong>Tech Stack:</strong> JavaScript, Nodejs</p>
                 <p>MySQL, Express, GitHub</p>
@@ -1119,9 +1138,9 @@ footer {
             <div class="project">
                  <h3>My Portfolio</h3>
                 <div class="project-image">
-                    <img src="../static/MP4.jpg" alt="Project 3 Hero Section">
-                    <img src="../static/MP3.jpg" alt="Project 3 About Section">
-                    <img src="../static/MP2.jpg" alt="Project 3 About Section">
+                    <img src="../static/images/MP4.jpg" alt="Project 3 Hero Section">
+                    <img src="../static/images/MP3.jpg" alt="Project 3 About Section">
+                    <img src="../static/images/MP2.jpg" alt="Project 3 About Section">
                 </div>
                 <p><strong>Tech Stack:</strong> Python, Flask, GitHub</p>                
                 <p>JavaScript, HTML, CSS, Bootstrap</p>
@@ -1147,6 +1166,15 @@ footer {
     <section id="contact">
         <div class="container">
             <h2>Contact Me</h2>
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="flash-message {{ category }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
             <form id="contact-form" action="/sendMessage", method="post" >
                 <input type="text" placeholder="Your Name" required>
                 <input type="email" placeholder="Your Email" required>

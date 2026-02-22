@@ -1,9 +1,28 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, flash, redirect, url_for
+from flask_mail import Mail, Message
+import os
+from dotenv import load_dotenv
 from flask_bootstrap import Bootstrap5
 
 
 myWebsite = Flask(__name__)
 bootstrap = Bootstrap5(myWebsite)
+
+# Load environment variables from .env
+load_dotenv()
+
+# Get values from .env file
+myWebsite.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
+myWebsite.config['MAIL_SERVER'] = os.getenv('MAIL_SERVER')
+myWebsite.config['MAIL_PORT'] = int(os.getenv('MAIL_PORT'))
+myWebsite.config['MAIL_USE_TLS'] = os.getenv('MAIL_USE_TLS') == 'True'
+myWebsite.config['MAIL_USERNAME'] = os.getenv('MAIL_USERNAME')
+myWebsite.config['MAIL_PASSWORD'] = os.getenv('MAIL_PASSWORD')
+myWebsite.config['MAIL_DEFAULT_SENDER'] = os.getenv('MAIL_DEFAULT_SENDER')
+
+
+mail = Mail(myWebsite)
+
 
 @myWebsite.route("/")
 def home():
@@ -19,12 +38,40 @@ def about():
 
 @myWebsite.route("/sendMessage", methods=['post'])
 def sendMessage():
-    your_message = request.form.get("Your Message")
-    if len(str('your_message')) <= 200:
-     return redirect('/')
-    else:
-        return('Message is too long')
+    
+    if request.method == 'POST':
+        name = request.form.get('name')
+        email = request.form.get('email')
+        message = request.form.get('message')
+        
+        # Validate inputs
+        # if not name or not email or not message:
+        #     flash('All fields are required!', 'error')
+        #     return redirect("/" + '#contact')
+        
+        try:
+            # Create and send email
+            msg = Message(
+                subject=f"New Contact Form Submission from {name}",
+                sender=myWebsite.config['MAIL_USERNAME'],
+                recipients=['odidikaanthony02@gmail.com']  # Where to receive emails
+            )
+            msg.body = f"""
+            You received a new message from your portfolio website!
 
+            Name: {name}
+            Email: {email}
+            Message:
+            {message}
+            """
+            mail.send(msg)
+            
+            flash('Message sent successfully! I will get back to you soon.', 'success')
+        except Exception as e:
+            flash(f'Failed to send message. Error: {str(e)}', 'error')
+        
+        return redirect('/' + '#contact')
+    
 if __name__ == "__main__":
     myWebsite.run(debug=True,host="0.0.0.0",port=8090)
 
