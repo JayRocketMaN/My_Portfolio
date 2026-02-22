@@ -1,0 +1,27 @@
+# Exported from Render on 2026-02-22T15:56:49Z
+version: "1"
+services:
+- type: web
+  name: My_Portfolio
+  runtime: python
+  repo: https://github.com/JayRocketMaN/My_Portfolio
+  plan: free
+  envVars:
+  - key: SECRET_KEY
+    sync: false
+  - key: MAIL_DEFAULT_SENDER
+    sync: false
+  - key: MAIL_PASSWORD
+    sync: false
+  - key: MAIL_USERNAME
+    sync: false
+  - key: MAIL_USE_TLS
+    sync: false
+  - key: MAIL_PORT
+    sync: false
+  - key: MAIL_SERVER
+    sync: false
+  region: oregon
+  buildCommand: pip install -r requirements.txt
+  startCommand: python app.py
+  autoDeployTrigger: commit
