@@ -63,7 +63,7 @@ def sendMessage():
         except Exception as e:
             flash(f'Error: {str(e)}', 'error')
         
-        return redirect(url_for('home') + '#contact')
+        return redirect('/'+ '#contact')
     
     return render_template('/')
 
