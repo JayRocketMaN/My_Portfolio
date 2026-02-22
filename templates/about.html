@@ -686,6 +686,7 @@ footer {
         top: 0;
         left: -70%;
         width: 40%;
+        padding: 30;
         height: 100%;
         background-color: rgba(75, 0, 130, 0.98);
         flex-direction: column;
@@ -1176,9 +1177,9 @@ footer {
             {% endif %}
         {% endwith %}
             <form id="contact-form" action="/sendMessage", method="post" >
-                <input type="text" placeholder="Your Name" required>
-                <input type="email" placeholder="Your Email" required>
-                <textarea placeholder="Your Message" required></textarea>
+                <input type="text" name="name" placeholder="Your Name" required>
+                <input type="email" name="email" placeholder="Your Email" required>
+                <textarea name="message" placeholder="Your Message" required></textarea>
                 <button type="submit" class="btn">Send Message</button>
             </form>
         </div>

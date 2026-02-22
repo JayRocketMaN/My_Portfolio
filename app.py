@@ -38,40 +38,35 @@ def about():
 
 @myWebsite.route("/sendMessage", methods=['post'])
 def sendMessage():
-    
-    if request.method == 'POST':
+    if request.method == 'post':
+        print("Form data received:", request.form)
+        
         name = request.form.get('name')
         email = request.form.get('email')
         message = request.form.get('message')
         
-        # Validate inputs
-        # if not name or not email or not message:
-        #     flash('All fields are required!', 'error')
-        #     return redirect("/" + '#contact')
+        print(f"Name: {name}, Email: {email}, Message: {message}")
+        
+        if not name or not email or not message:
+            flash('All fields are required!', 'error')
+            return redirect(url_for('home') + '#contact')
         
         try:
-            # Create and send email
             msg = Message(
-                subject=f"New Contact Form Submission from {name}",
+                subject=f"New Contact from {name}",
                 sender=myWebsite.config['MAIL_USERNAME'],
-                recipients=['odidikaanthony02@gmail.com']  # Where to receive emails
+                recipients=myWebsite.config['MAIL_USERNAME']
             )
-            msg.body = f"""
-            You received a new message from your portfolio website!
-
-            Name: {name}
-            Email: {email}
-            Message:
-            {message}
-            """
+            msg.body = f"Name: {name}\nEmail: {email}\nMessage: {message}"
             mail.send(msg)
-            
-            flash('Message sent successfully! I will get back to you soon.', 'success')
+            flash('Message sent successfully!', 'success')
         except Exception as e:
-            flash(f'Failed to send message. Error: {str(e)}', 'error')
+            flash(f'Error: {str(e)}', 'error')
         
-        return redirect('/' + '#contact')
+        return redirect(url_for('home') + '#contact')
     
+    return render_template('/')
+
 if __name__ == "__main__":
     myWebsite.run(debug=True,host="0.0.0.0",port=8090)
 
