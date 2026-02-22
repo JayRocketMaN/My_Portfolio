@@ -9,6 +9,12 @@ services:
   envVars:
   - key: SECRET_KEY
     sync: false
+  - key: HOST
+    sync: false
+  - key: PORT
+    sync: false
+  - key: THREADS
+    sync: false
   - key: MAIL_DEFAULT_SENDER
     sync: false
   - key: MAIL_PASSWORD
@@ -23,5 +29,5 @@ services:
     sync: false
   region: oregon
   buildCommand: pip install -r requirements.txt
-  startCommand: python app.py
+  startCommand: python start_server.py
   autoDeployTrigger: commit
