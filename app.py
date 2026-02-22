@@ -47,9 +47,9 @@ def sendMessage():
         
         print(f"Name: {name}, Email: {email}, Message: {message}")
         
-        if not name or not email or not message:
-            flash('All fields are required!', 'error')
-            return redirect(url_for('home') + '#contact')
+        # if not name or not email or not message:
+        #     flash('All fields are required!', 'error')
+        #     return redirect(url_for('home') + '#contact')
         
         try:
             msg = Message(
