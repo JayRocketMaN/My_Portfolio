@@ -36,38 +36,81 @@ def skills():
 def about():
     return render_template('about.html')
 
-@myWebsite.route("/sendMessage", methods=['post'])
+# @myWebsite.route("/sendMessage", methods=['post'])
+# def sendMessage():
+#     if request.method == 'post':
+#         #print("Form data received:", request.form)
+        
+#         name = request.form.get('name')
+#         email = request.form.get('email')
+#         message = request.form.get('message')
+
+        
+#         #print(f"Name: {name}, Email: {email}, Message: {message}")
+        
+#         # if not name or not email or not message:
+#         #     flash('All fields are required!', 'error')
+#         #     return redirect(url_for('home') + '#contact')
+        
+#         try:
+#             msg = Message(
+#                 subject=f"New Contact from {name}",
+#                 sender=myWebsite.config['MAIL_USERNAME'],
+#                 recipients=myWebsite.config['MAIL_USERNAME']
+#             )
+#             msg.body = f"Name: {name}\nEmail: {email}\nMessage: {message}"
+#             mail.send(msg)
+#             flash('Message sent successfully!', 'success')
+#         except Exception as e:
+#             flash(f'Error: {str(e)}', 'error')
+        
+#         return redirect('/'+ '#contact')
+    
+#     return render_template('about.html')
+
+
+
+
+@myWebsite.route('/sendMessage', methods=['POST'])
 def sendMessage():
-    if request.method == 'post':
-        print("Form data received:", request.form)
+    if request.method == 'POST':
+        # Debug 1: Check if route is called
+        print("=== DEBUG: Contact route called ===")
+        print("Form data:", dict(request.form))
+        print("===================================")
         
         name = request.form.get('name')
         email = request.form.get('email')
         message = request.form.get('message')
         
-        print(f"Name: {name}, Email: {email}, Message: {message}")
+        print(f"Name: {name}")
+        print(f"Email: {email}")
+        print(f"Message: {message}")
         
-        if not name or not email or not message:
-            flash('All fields are required!', 'error')
-            return redirect(url_for('home') + '#contact')
+        # Check if data is None
+        if name is None or email is None or message is None:
+            print("ERROR: Form data is None!")
+            flash('Form data not received. Check console.', 'error')
+            return redirect('/' + '#contact')
         
         try:
+            print("Attempting to send email...")
             msg = Message(
                 subject=f"New Contact from {name}",
                 sender=myWebsite.config['MAIL_USERNAME'],
-                recipients=myWebsite.config['MAIL_USERNAME']
+                recipients=[myWebsite.config['MAIL_USERNAME']]
             )
             msg.body = f"Name: {name}\nEmail: {email}\nMessage: {message}"
             mail.send(msg)
+            print("Email sent successfully!")
             flash('Message sent successfully!', 'success')
         except Exception as e:
+            print(f"ERROR sending email: {e}")
             flash(f'Error: {str(e)}', 'error')
         
-        return redirect('/'+ '#contact')
-    
-    return render_template('about.html')
+        return redirect('/' + '#contact')
 
 if __name__ == "__main__":
-    myWebsite.run(debug=True,host="0.0.0.0",port=8090)
+    myWebsite.run(debug=True)
 
     #host="0.0.0.0",port=8090
