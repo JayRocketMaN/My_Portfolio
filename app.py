@@ -82,6 +82,9 @@ def contactMe():
             # Send the API request
             response = requests.post(api_url, json=payload, headers=headers)
             
+            print(f"--- BREVO STATUS: {response.status_code} ---", flush=True)
+            print(f"--- BREVO RESPONSE: {response.text} ---", flush=True)
+            
             if response.status_code in [200, 201]:
                 flash('Message sent successfully!', 'success')
             else:
@@ -89,11 +92,29 @@ def contactMe():
                 flash('Email provider rejected the message.', 'error')
                 
     except Exception as e:
+            print(f"--- PYTHON ERROR: {str(e)} ---", flush=True)
             flash(f'Error: {str(e)}', 'error')
         
             return redirect(url_for('home') + '#contact')
 
     return render_template('about.html', form=form)
+
+# try:
+#             # Send the API request
+#             response = requests.post(api_url, json=payload, headers=headers)
+            
+#             # FORCE RENDER TO PRINT THE EXACT ERROR:
+#             print(f"--- BREVO STATUS: {response.status_code} ---", flush=True)
+#             print(f"--- BREVO RESPONSE: {response.text} ---", flush=True)
+            
+#             if response.status_code in[200, 201]:
+#                 flash('Message sent successfully!', 'success')
+#             else:
+#                 flash('Email provider rejected the message.', 'error')
+                
+#         except Exception as e:
+#             print(f"--- PYTHON ERROR: {str(e)} ---", flush=True)
+#             flash(f'Error: {str(e)}', 'error')
                  # try:
         #     msg = Message(
         #         subject=f"New Contact from {name}",
