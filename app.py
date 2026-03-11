@@ -71,8 +71,9 @@ def contactMe():
         }
         
     payload = {
-            "sender": {"name": name, "email": email},
+            "sender": {"name": "My Portfolio Form", "email": "odidikaanthony02@gmail.com"},
             "to":[{"email": "odidikaanthony02@gmail.com", "name": "somto"}],
+            "replyTo": {"email": email, "name": name}, # The visitor's email goes here!
             "subject": f"New Contact from {name}",
             "htmlContent": f"<p><strong>Name:</strong> {name}</p><p><strong>Email:</strong> {email}</p><p><strong>Message:</strong> {message}</p>"
         }
@@ -84,6 +85,7 @@ def contactMe():
             if response.status_code in [200, 201]:
                 flash('Message sent successfully!', 'success')
             else:
+                print(f"BREVO ERROR: {response.status_code} - {response.text}") 
                 flash('Email provider rejected the message.', 'error')
                 
     except Exception as e:
