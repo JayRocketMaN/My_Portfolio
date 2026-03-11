@@ -58,9 +58,7 @@ def contactMe():
         name = form.name.data
         email = form.email.data
         message = form.message.data
-    else:
-        flash('fill up the form!', 'error')
-
+   
         try:
             msg = Message(
                 subject=f"New Contact from {name}",
