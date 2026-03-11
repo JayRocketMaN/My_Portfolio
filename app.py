@@ -1,10 +1,12 @@
 from flask import Flask, render_template, request, flash, redirect, url_for
 from flask_mail import Mail, Message
-import os, re
+import os
 from flask_wtf import FlaskForm
 from flask_bootstrap import Bootstrap5
 from wtforms import StringField, EmailField, SubmitField, TextAreaField
 from wtforms.validators import DataRequired, Email, Length
+import requests
+
 from dotenv import load_dotenv
 
 
@@ -77,7 +79,7 @@ def contactMe():
     
     try:
             # Send the API request
-            response = request.post(api_url, json=payload, headers=headers)
+            response = requests.post(api_url, json=payload, headers=headers)
             
             if response.status_code in [200, 201]:
                 flash('Message sent successfully!', 'success')
