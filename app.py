@@ -23,6 +23,7 @@ myWebsite.config['MAIL_USE_SSL'] = os.getenv('MAIL_USE_SSL') == 'True'
 myWebsite.config['MAIL_USERNAME'] = os.getenv('MAIL_USERNAME')
 myWebsite.config['MAIL_PASSWORD'] = os.getenv('MAIL_PASSWORD')
 myWebsite.config['MAIL_DEFAULT_SENDER'] = os.getenv('MAIL_DEFAULT_SENDER')
+myWebsite.config['BREVO_EMAIL_API_KEY'] = os.getenv('BREVO_EMAIL_API_KEY')
 
 
 
@@ -59,19 +60,51 @@ def contactMe():
         email = form.email.data
         message = form.message.data
    
-        try:
-            msg = Message(
-                subject=f"New Contact from {name}",
-                sender=myWebsite.config['MAIL_USERNAME'],
-                recipients=[myWebsite.config['MAIL_USERNAME']]
-            )
-            msg.body = f"Name: {name}\nEmail: {email}\nMessage: {message}"
-            mail.send(msg)
-            flash('Message sent successfully!', 'success')
-        except Exception as e:
+       
+    api_url = "https://api.brevo.com/v3/smtp/email"
+    headers = {
+            "accept": "application/json",
+            "api-key": os.environ.get("BREVO_API_KEY"),
+            "content-type": "application/json"
+        }
+        
+    payload = {
+            "sender": {"name": name, "email": email},
+            "to":[{"email": "odidikaanthony02@gmail.com", "name": "somto"}],
+            "subject": f"New Contact from {name}",
+            "htmlContent": f"<p><strong>Name:</strong> {name}</p><p><strong>Email:</strong> {email}</p><p><strong>Message:</strong> {message}</p>"
+        }
+    
+    try:
+            # Send the API request
+            response = request.post(api_url, json=payload, headers=headers)
+            
+            if response.status_code in [200, 201]:
+                flash('Message sent successfully!', 'success')
+            else:
+                flash('Email provider rejected the message.', 'error')
+                
+    except Exception as e:
             flash(f'Error: {str(e)}', 'error')
         
-        return redirect('/' + '#contact')
+            return redirect(url_for('home') + '#contact')
+
+    return render_template('about.html', form=form)
+                 # try:
+        #     msg = Message(
+        #         subject=f"New Contact from {name}",
+        #         sender=myWebsite.config['MAIL_USERNAME'],
+        #         recipients=[myWebsite.config['MAIL_USERNAME']]
+        #     )
+        #     msg.body = f"Name: {name}\nEmail: {email}\nMessage: {message}"
+        #     mail.send(msg)
+        #     flash('Message sent successfully!', 'success')
+        # except Exception as e:
+        #     flash(f'Error: {str(e)}', 'error')
+        
+        # return redirect('/' + '#contact')
+    
+
 # def sendMessage():
 #     if request.method == 'POST':e
 #         name = request.form.get('name')
