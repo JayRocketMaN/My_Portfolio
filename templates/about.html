@@ -1176,11 +1176,42 @@ footer {
                 {% endfor %}
             {% endif %}
         {% endwith %}
-            <form id="contact-form" action="/sendMessage", method="post" >
+            <!-- <form  action="/sendMessage", method="post" >
                 <input type="text" name="name" placeholder="Your Name" required>
                 <input type="email" name="email" placeholder="Your Email" required>
                 <textarea name="message" placeholder="Your Message" required></textarea>
                 <button type="submit" class="btn">Send Message</button>
+            </form> -->
+            <form id="contact-form" action="{{ url_for('contactMe') }}" method="POST" novalidate >
+                {{ form.hidden_tag() }}
+                <div class='form-group'>
+                    {{form.name.label}}<br>
+                    {{form.name(class="form-control", placeholder="Your Name")}}
+                    {% if form.name.errors %}
+                        {% for error in form.name.errors %}
+                            <span class="error"> {{error}}</span>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+                <div class='form-group'>
+                    {{form.email.label}}<br>
+                    {{form.email(class="form-control", placeholder="Your Email")}}
+                    {% if form.email.errors %}
+                        {% for error in form.email.errors %}
+                            <span class="error"> {{error}}</span>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+                <div class='form-group'>
+                    {{form.message.label}}<br>
+                    {{form.message(class="form-control", placeholder="Your Message")}}
+                    {% if form.message.errors %}
+                        {% for error in form.message.errors %}
+                            <span class="error"> {{error}}</span>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+                {{ form.submit()}}
             </form>
         </div>
     </section>

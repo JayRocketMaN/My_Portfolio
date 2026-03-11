@@ -1,8 +1,11 @@
 from flask import Flask, render_template, request, flash, redirect, url_for
 from flask_mail import Mail, Message
-import os
-from dotenv import load_dotenv
+import os, re
+from flask_wtf import FlaskForm
 from flask_bootstrap import Bootstrap5
+from wtforms import StringField, EmailField, SubmitField, TextAreaField
+from wtforms.validators import DataRequired, Email, Length
+from dotenv import load_dotenv
 
 
 myWebsite = Flask(__name__)
@@ -16,9 +19,11 @@ myWebsite.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 myWebsite.config['MAIL_SERVER'] = os.getenv('MAIL_SERVER')
 myWebsite.config['MAIL_PORT'] = int(os.getenv('MAIL_PORT'))
 myWebsite.config['MAIL_USE_TLS'] = os.getenv('MAIL_USE_TLS') == 'True'
+myWebsite.config['MAIL_USE_SSL'] = os.getenv('MAIL_USE_SSL') == 'True' 
 myWebsite.config['MAIL_USERNAME'] = os.getenv('MAIL_USERNAME')
 myWebsite.config['MAIL_PASSWORD'] = os.getenv('MAIL_PASSWORD')
 myWebsite.config['MAIL_DEFAULT_SENDER'] = os.getenv('MAIL_DEFAULT_SENDER')
+
 
 
 mail = Mail(myWebsite)
@@ -26,7 +31,8 @@ mail = Mail(myWebsite)
 
 @myWebsite.route("/")
 def home():
-    return render_template('about.html')#remeber to correct the route to the actual 'home' route
+    form = ContactForm()
+    return render_template('about.html', form=form)#remeber to correct the route to the actual 'home' route
 
 @myWebsite.route("/skills")
 def skills():
@@ -34,21 +40,27 @@ def skills():
 
 @myWebsite.route("/about")
 def about():
-    return render_template('about.html')
+    form = ContactForm()
+    return render_template('about.html', form=form)
 
-@myWebsite.route('/sendMessage', methods=['POST'])
-def sendMessage():
-    if request.method == 'POST':
-        name = request.form.get('name')
-        email = request.form.get('email')
-        message = request.form.get('message')
-        
-        # Check if data is None
-        if name is None or email is None or message is None:
-            print("ERROR: Form data is None!")
-            flash('Form data not received. Check console.', 'error')
-            return redirect('/' + '#contact')
-        
+
+class ContactForm(FlaskForm):
+        name = StringField('name', validators=[DataRequired()])
+        email = EmailField('Email', validators=[DataRequired(), Email()])
+        message = TextAreaField('message', validators=[DataRequired(), Length(min=-1, max=1000, message='check message again')])
+        submit = SubmitField('Send Message')
+
+
+@myWebsite.route('/sendMessage', methods=['GET','POST'])
+def contactMe():
+    form = ContactForm()
+    if form.validate_on_submit():
+        name = form.name.data
+        email = form.email.data
+        message = form.message.data
+    else:
+        flash('fill up the form!', 'error')
+
         try:
             msg = Message(
                 subject=f"New Contact from {name}",
@@ -62,6 +74,19 @@ def sendMessage():
             flash(f'Error: {str(e)}', 'error')
         
         return redirect('/' + '#contact')
+# def sendMessage():
+#     if request.method == 'POST':e
+#         name = request.form.get('name')
+#         email = request.form.get('email')
+#         message = request.form.get('message')
+        
+#         # Check if data is None
+#         if name is None or email is None or message is None:
+#             print("ERROR: Form data is None!")
+#             flash('Form data not received. Check console.', 'error')
+#             return redirect('/' + '#contact')
+        
+        
 
 if __name__ == "__main__":
     myWebsite.run(debug=True)
