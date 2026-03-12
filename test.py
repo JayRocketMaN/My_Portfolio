@@ -15,7 +15,7 @@ load_dotenv()
 import requests
 
 # 1. Paste your actual Brevo API key here (just for this test)
-API_KEY = os.getenv(('BREVO_EMAIL_API_KEY'))
+API_KEY = os.getenv(('BREVO_API_KEY'))
 
 # 2. Put the exact email you used to sign up for Brevo here
 YOUR_EMAIL = "odidikaanthony02@gmail.com"

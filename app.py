@@ -25,7 +25,7 @@ myWebsite.config['MAIL_USE_SSL'] = os.getenv('MAIL_USE_SSL') == 'True'
 myWebsite.config['MAIL_USERNAME'] = os.getenv('MAIL_USERNAME')
 myWebsite.config['MAIL_PASSWORD'] = os.getenv('MAIL_PASSWORD')
 myWebsite.config['MAIL_DEFAULT_SENDER'] = os.getenv('MAIL_DEFAULT_SENDER')
-myWebsite.config['BREVO_EMAIL_API_KEY'] = os.getenv('BREVO_EMAIL_API_KEY')
+myWebsite.config['BREVO_API_KEY'] = os.getenv('BREVO_API_KEY')
 
 
 
@@ -61,19 +61,22 @@ def contactMe():
         name = form.name.data
         email = form.email.data
         message = form.message.data
-   
+
+    EMAIL = 'odidikaanthony02@gmail.com'
+    brevo_key = os.environ.get("BREVO_API_KEY")
+
        
     api_url = "https://api.brevo.com/v3/smtp/email"
     headers = {
             "accept": "application/json",
-            "api-key": os.environ.get("BREVO_API_KEY"),
+            "api-key": brevo_key,
             "content-type": "application/json"
         }
         
     payload = {
-            "sender": {"name": "My Portfolio Form", "email": "odidikaanthony02@gmail.com"},
-            "to":[{"email": "odidikaanthony02@gmail.com", "name": "somto"}],
-            "replyTo": {"email": email, "name": name}, # The visitor's email goes here!
+            "sender": {"name": "My Portfolio Form", "email": EMAIL},
+            "to":[{"email": EMAIL, "name": "somto"}],
+            #"replyTo": [{"email": email, "name": name}], # The visitor's email goes here!
             "subject": f"New Contact from {name}",
             "htmlContent": f"<p><strong>Name:</strong> {name}</p><p><strong>Email:</strong> {email}</p><p><strong>Message:</strong> {message}</p>"
         }
