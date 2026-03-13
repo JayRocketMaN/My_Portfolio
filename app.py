@@ -75,7 +75,7 @@ def contactMe():
         
     payload = {
             "sender": {"name": "My Portfolio Form", "email": EMAIL},
-            "to":[{"email": EMAIL, "name": "somto"}],
+            "to":[{"email": EMAIL, "name": 'me'}],
             #"replyTo": [{"email": email, "name": name}], # The visitor's email goes here!
             "subject": f"New Contact from {name}",
             "htmlContent": f"<p><strong>Name:</strong> {name}</p><p><strong>Email:</strong> {email}</p><p><strong>Message:</strong> {message}</p>"
