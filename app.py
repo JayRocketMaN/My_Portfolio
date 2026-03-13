@@ -64,6 +64,10 @@ def contactMe():
 
     EMAIL = 'odidikaanthony02@gmail.com'
     brevo_key = os.environ.get("BREVO_API_KEY")
+    if brevo_key:
+            print(f"DEBUG: I found the key! It starts with: {brevo_key[:7]}...", flush=True)
+    else:
+            print("DEBUG: THE KEY IS MISSING! os.getenv returned None.", flush=True)
 
        
     api_url = "https://api.brevo.com/v3/smtp/email"
