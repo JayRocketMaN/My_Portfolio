@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, flash, redirect, url_for
+from flask import Flask, render_template, request, flash, redirect, url_for, session
 from flask_mail import Mail, Message
 import os
 from flask_wtf import FlaskForm
@@ -94,17 +94,19 @@ def contactMe():
             
             if response.status_code in [200, 201]:
                 flash('Message sent successfully!', 'success')
+                return redirect(url_for('home') + '#contact')
             else:
                 print(f"BREVO ERROR: {response.status_code} - {response.text}") 
-                flash('Email provider rejected the message.', 'error')
+                flash('Email provider rejected the message.', 'error')                
+                return redirect(url_for('home') + '#contact')
                 
     except Exception as e:
             print(f"--- PYTHON ERROR: {str(e)} ---", flush=True)
             flash(f'Error: {str(e)}', 'error')
         
-            return redirect(url_for('home') + '#contact')
+            return redirect(url_for('home' + '#contact'))
+   
 
-    return render_template('about.html', form=form)
 
 # try:
 #             # Send the API request
